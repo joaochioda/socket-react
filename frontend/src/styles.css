@@ -1,0 +1,132 @@
+body {
+  background-image: linear-gradient(to left, #6600cc, #4d0099);
+}
+
+input:focus {
+  outline: none;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input {
+  letter-spacing: 3px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  box-sizing: border-box;
+  font-family: "Arvo";
+  font-size: 18px;
+  height: 50px;
+  left: 0;
+  position: relative;
+  top: 0;
+  width: 200px;
+}
+
+input::-webkit-input-placeholder {
+  color: #aaa;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: #e9d8a6;
+}
+
+.input:focus + .underline {
+  transform: scale(1);
+}
+
+.underline {
+  background-color: #86d472;
+  display: inline-block;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  top: 49px;
+  -webkit-transform: scale(0, 1);
+  transform: scale(0, 1);
+  -webkit-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  width: 202px;
+}
+
+.bn39 {
+  background-image: linear-gradient(135deg, #008aff, #86d472);
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #ffffff;
+  display: block;
+  height: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
+  position: relative;
+  text-decoration: none;
+  z-index: 2;
+}
+
+.bn632-hover {
+  overflow: hidden;
+
+  margin-left: 20px;
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  height: 55px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.bn632-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.bn632-hover:focus {
+  outline: none;
+}
+
+.bn632-hover.bn26 {
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #4481eb
+  );
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.bn632-hover.bn26.color {
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #86d472,
+    #04befe,
+    #86d472
+  );
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.bn632-hover.bn26:disabled {
+  background-image: linear-gradient(
+    to right,
+    #0d001a,
+    #26004d,
+    #0d001a,
+    #26004d
+  );
+}

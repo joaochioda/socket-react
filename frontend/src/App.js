@@ -3,6 +3,8 @@ import { useSocketContext } from "./context/SocketContext";
 
 import { useHistory } from "react-router-dom";
 
+import "./styles.css";
+
 function App() {
   const [, setResponse] = useState("");
   const [rooms, setRooms] = useState([]);
@@ -41,18 +43,37 @@ function App() {
   return (
     !myRoom && (
       <div>
-        <input
-          onChange={(e) => setName(e.target.value)}
-          placeholder={"Name"}
-          value={name}
-        ></input>
-        <button onClick={createRoom}>Create new room</button>
-        <br />s dsadsads
-        {rooms.map((room) => (
-          <button key={room.id} onClick={() => joinRoom(room.id)}>
-            {room.id}
+        <div style={{ display: "flex" }}>
+          <div class="input-wrapper">
+            <input
+              onChange={(e) => setName(e.target.value)}
+              placeholder={"Name"}
+              value={name}
+              className="input"
+            ></input>
+            <span class="underline"></span>
+          </div>
+
+          <button
+            className="bn632-hover bn26"
+            onClick={createRoom}
+            disabled={name.length < 1}
+          >
+            Create new room
           </button>
-        ))}
+        </div>
+        <br />
+        <div style={{ display: "flex" }}>
+          {rooms.map((room) => (
+            <button
+              className="bn632-hover bn26 color"
+              key={room.id}
+              onClick={() => joinRoom(room.id)}
+            >
+              {room.name}
+            </button>
+          ))}
+        </div>
       </div>
     )
   );
