@@ -4,20 +4,36 @@ module.exports = {
     user.id = id;
     user.name = name;
     user.room = roomId;
-    user.x = 0;
-    user.y = 0;
+    let x = 0;
+    let y = 0;
+    user.tail = [];
+
     function setPosition1() {
-      user.x = 100;
-      user.y = 100;
+      user.tail = [
+        [100, 100],
+        [85, 100],
+        [70, 100],
+        [55, 100],
+      ];
+      x = 100;
+      y = 100;
     }
     function setPosition2() {
-      user.x = 300;
-      user.y = 300;
+      user.tail = [
+        [300, 100],
+        [285, 100],
+        [270, 100],
+        [255, 100],
+      ];
+      x = 300;
+      y = 100;
     }
 
-    function delta(x, y) {
-      user.x += x;
-      user.y += y;
+    function delta(dx, dy) {
+      x += dx;
+      y += dy;
+      user.tail.unshift([x, y]);
+      user.tail.pop();
     }
 
     user.setPosition1 = setPosition1;

@@ -11,6 +11,10 @@ module.exports = {
       return users.find((user) => user.id === id);
     }
 
+    function getAllWithRoom(roomId) {
+      return users.filter((user) => user.room === roomId);
+    }
+
     socket.on("createRoom", function (data) {
       if (rooms.find((room) => room.id === socket.id)) return;
       const myRoom = room(socket.id, data.name);
@@ -37,8 +41,10 @@ module.exports = {
       socketIo.in(user.room).emit("message", message);
     });
 
-    socket.on("start", function (data) {
-      game(socket, users, socketIo);
+    socket.on("start", function () {
+      const user = getUser(socket.id);
+      const usersInRoom = getAllWithRoom(user.room);
+      game(socket, usersInRoom, socketIo);
     });
 
     setInterval(() => {

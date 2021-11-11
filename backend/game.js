@@ -5,8 +5,7 @@ module.exports = {
 
     setInterval(() => {
       users[0].delta(15, 0);
-      users[1].delta(-15, 0);
-      console.log(users[0].x);
+      users[1].delta(15, 0);
       socketIo.in(users[0].room).emit("move", users);
     }, 1000);
   },
