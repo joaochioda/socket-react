@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import "./styles.css";
 
 function App() {
-  const [, setResponse] = useState("");
   const [rooms, setRooms] = useState([]);
   const [myRoom, setMyRoom] = useState(null);
   const { socketIo } = useSocketContext();
@@ -15,9 +14,6 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    socketIo.on("FromAPI", (data) => {
-      setResponse(data);
-    });
     socketIo.on("roomCreated", (data) => {
       setRooms(data);
     });
@@ -28,6 +24,11 @@ function App() {
       setMyRoom(data);
       history.push(`/room/${data.id}`);
     });
+    return () => {
+      socketIo.removeAllListeners("roomCreated");
+      socketIo.removeAllListeners("rooms");
+      socketIo.removeAllListeners("roomJoined");
+    };
   });
 
   function createRoom() {
@@ -44,14 +45,14 @@ function App() {
     !myRoom && (
       <div>
         <div style={{ display: "flex" }}>
-          <div class="input-wrapper">
+          <div className="input-wrapper">
             <input
               onChange={(e) => setName(e.target.value)}
               placeholder={"Name"}
               value={name}
               className="input"
             ></input>
-            <span class="underline"></span>
+            <span className="underline"></span>
           </div>
 
           <button
