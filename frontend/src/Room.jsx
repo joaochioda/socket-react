@@ -29,6 +29,10 @@ function Room() {
 
     }, [socketIo]);
 
+    function handleKeyDown(key) {
+        socketIo.emit("changeDirection", key)
+    }
+
     return (<div>
         <button onClick={() => history.push('/')}>Voltar</button>
         <input onChange={(e) => setValue(e.target.value)}></input>
@@ -43,7 +47,7 @@ function Room() {
             })}
         </div>
 
-        <Canvas draw={draw} users={users} />
+        <Canvas draw={draw} users={users} handleKeyDown={handleKeyDown} />
     </div>)
 }
 

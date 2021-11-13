@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 
 const Canvas = props => {
 
-    const { draw, users, ...rest } = props
+    const { draw, users, handleKeyDown, ...rest } = props
     const canvasRef = useRef(null)
     useEffect(() => {
 
@@ -20,7 +20,7 @@ const Canvas = props => {
         }
     }, [draw, users])
 
-    return <canvas ref={canvasRef} {...rest} width={600} height={600} />
+    return <canvas ref={canvasRef} {...rest} width={600} height={600} onKeyDown={(e) => handleKeyDown(e.key)} tabIndex={1} />
 }
 
 export default Canvas
