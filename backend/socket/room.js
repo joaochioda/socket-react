@@ -1,4 +1,4 @@
-const { user, room } = require("./models");
+const { user, room } = require("../models");
 const { chat } = require("./chat");
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
 
       rooms.push(myRoom);
       socket.join(myRoom.id);
-      socket.emit("roomJoined", myRoom);
+      socketIo.in(myRoom.id).emit("roomJoined", myRoom);
       chat(socket, rooms, socketIo);
     });
 
@@ -19,7 +19,7 @@ module.exports = {
       if (!room) return;
       socket.join(room.id);
       saveUser(socket, data, room);
-      socketIo.emit("roomJoined", room);
+      socketIo.in(room.id).emit("roomJoined", room);
       chat(socket, rooms, socketIo);
     });
 

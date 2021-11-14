@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
-const { room } = require("./room");
-
+const { room } = require("./socket/room");
+const { gameStart } = require("./gameStart");
 const socketIo = require("socket.io")(http, {
   cors: {
     origin: "*",
@@ -16,4 +16,7 @@ http.listen(4000, function () {
   socketIo.on("connection", function (socket) {
     room(socket, rooms, socketIo);
   });
+  setInterval(() => {
+    gameStart(rooms, socketIo);
+  }, 100);
 });

@@ -17,6 +17,6 @@ module.exports = {
       socketIo.in(user.room).emit("message", message);
     });
 
-    // game(socket, rooms, socketIo);
+    game(socket, rooms, socketIo);
   },
 };
