@@ -19,10 +19,6 @@ function Room() {
         socketIo.on("message", (data) => {
             setMessages(messages => [...messages, data]);
         });
-        socketIo.on("roomJoined", (data) => {
-
-        })
-
         socketIo.on("move", (data) => {
             setUsers(data)
         })
@@ -33,9 +29,13 @@ function Room() {
         socketIo.emit("changeDirection", key)
     }
 
+    function handleEnterDown(key) {
+        if (key === 'Enter') socketIo.emit("sendMessage", value)
+    }
+
     return (<div>
         <button onClick={() => history.push('/')}>Voltar</button>
-        <input onChange={(e) => setValue(e.target.value)}></input>
+        <input onChange={(e) => setValue(e.target.value)} onKeyDown={(e) => handleEnterDown(e.key)}></input>
         <button onClick={() => socketIo.emit("sendMessage", value)}>Enviar</button>
         <button
             //disabled={users.length !== 2} 

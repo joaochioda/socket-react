@@ -90,7 +90,7 @@ module.exports = {
     room.id = id;
     room.name = name;
     room.users = [];
-
+    room.start = false;
     return room;
   },
 };
