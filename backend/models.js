@@ -34,21 +34,42 @@ module.exports = {
       y = 100;
     }
 
-    function move() {
-      if (x + dx > limit) {
+    function move(apple_x, apple_y, generatesApple, room) {
+      if (x + dx >= limit) {
         x = 0;
-      } else if (x + dx < 0) {
+      } else if (x + dx <= 0) {
         x = limit;
-      } else if (y + dy > limit) {
+      } else if (y + dy >= limit) {
         y = 0;
-      } else if (y + dy < 0) {
+      } else if (y + dy <= 0) {
         y = limit;
       } else {
         x += dx;
         y += dy;
       }
-      user.tail.unshift([x, y]);
-      user.tail.pop();
+      if (checkCollision(apple_x, apple_y)) {
+        user.tail.unshift([x, y]);
+        generatesApple(room);
+      } else {
+        user.tail.unshift([x, y]);
+        user.tail.pop();
+      }
+    }
+
+    function checkCollision(apple_x, apple_y) {
+      appleHeight = 15;
+      appleWidth = 15;
+      ballHeight = 15;
+      ballWidth = 15;
+
+      if (
+        x < apple_x + appleWidth &&
+        x + ballWidth > apple_x &&
+        y < apple_y + appleHeight &&
+        y + ballHeight > apple_y
+      ) {
+        return true;
+      }
     }
 
     function changeDirection(key) {
@@ -91,6 +112,7 @@ module.exports = {
     room.name = name;
     room.users = [];
     room.start = false;
+    room.apple = [];
     return room;
   },
 };

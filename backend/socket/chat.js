@@ -1,4 +1,6 @@
 const { game } = require("./game");
+const { getMyRoomId, getMyRoom } = require("../utils");
+
 module.exports = {
   chat(socket, rooms, socketIo) {
     function getUser(id, myRoom) {
@@ -6,13 +8,10 @@ module.exports = {
     }
 
     socket.on("sendMessage", function (data) {
-      const arr = Array.from(socket.adapter.rooms);
-      const filtered = arr.filter((room) => !room[1].has(room[0]));
-      const room = filtered.map((i) => i[0])[0];
-
-      const myRoom = rooms.find((r) => r.id === room);
-
+      const myRoomId = getMyRoomId(socket);
+      const myRoom = getMyRoom(myRoomId, rooms);
       const user = getUser(socket.id, myRoom);
+
       const message = `${user.name}: ${data}`;
       socketIo.in(user.room).emit("message", message);
     });

@@ -10,7 +10,7 @@ const Canvas = props => {
         const context = canvas.getContext('2d')
         let animationFrameId
         const render = () => {
-            draw(context, users[0], users[1])
+            draw(context, users[0], users[1], users[2])
             animationFrameId = window.requestAnimationFrame(render)
         }
         render()
